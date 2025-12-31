@@ -22,6 +22,9 @@ ParentWindow::ParentWindow(QWidget *parent)
     // if there is no dataset, set the button to unavailable status
     ui->actionInterpolation->setEnabled(false);
 
+    // 2025/2026 feature 2: disable FFT action when there is no dataset
+    ui->actionFourierTransform->setEnabled(false);
+
     // connect signal and slot for plotting XY graph from main menu
     connect(this, SIGNAL(PlotXYData_SIGNAL(DataSet*)), this, SLOT(GraphWindowToBePlotted(DataSet*)));
 }
@@ -91,6 +94,9 @@ void ParentWindow::OpenDataSet(QString* FileName)
 
         // enable the button if there are existing datasets
         ui->actionInterpolation->setEnabled(true);
+
+        // 2025/2026 feature 2: enable FFT action when dataset is loaded
+        ui->actionFourierTransform->setEnabled(true);
     }
 }
 
@@ -175,6 +181,38 @@ void ParentWindow::on_actionInterpolation_triggered(){
     delete Interpolation_dlg;
 }
 
+// 2025/2026 feature 2: Fourier Transform
+void ParentWindow::on_actionFourierTransform_triggered(){
+    FFTDialog* FFT_dlg = new FFTDialog(AllDataSets, this);
+    FFT_dlg->exec();
+    delete FFT_dlg;
+}
+
+// 2025/2026 feature 2: receive FFT dataset (amplitude or phase)
+void ParentWindow::receiveFFTDataSet(DataSet* AddedDataSet){
+    if (AddedDataSet->IsDataSetValid) // Making sure the dataset is only dealt with if it was loaded successfully
+    {
+        AllDataSets.push_back(AddedDataSet); // Adding a pointer to the new dataset so that it can be accessed by the rest of the app
+        checkDataSetName(AddedDataSet);
+
+        // Create a subWindow for the loaded DataSet
+        AddedDataSetWindow=new DataSetWindow(AddedDataSet,this);
+        subWindow=ui->WindowsManager->addSubWindow(AddedDataSetWindow);
+        AddedDataSetWindow->show(); // showing the new dataset window to the user (when it is added for the first time)
+
+        // To enable the ParentWindow to plot the dataset when the user clicks on a plot option in the context menu
+        // of an already displayed DataSetWindow
+        connect(AddedDataSetWindow,SIGNAL(Plot_XYPlot_SIGNAL(DataSet*)),this,SLOT(GraphWindowToBePlotted(DataSet*)));
+        connect(AddedDataSetWindow,SIGNAL(Open_HistPlotDialog_SIGNAL(DataSet*)),this,SLOT(OpenHistPlotDialog(DataSet*)));
+
+        // To remove a dataset when the dataset window is closed
+        connect(AddedDataSetWindow, SIGNAL(deleteDataSet_SIGNAL(DataSet*)), this, SLOT(deleteDataSet(DataSet*)));
+
+        // Refresh the datasets when one of them is renamed or deleted
+        connect(AddedDataSetWindow, SIGNAL(refreshDataSetName_SIGNAL()), this, SLOT(refreshDataSetName()));
+    }
+}
+
 // new feature 3: receive interpolation dataset from interpolation dialog
 void ParentWindow::receiveInterpolationDataSet(DataSet* AddedDataSet){
     if (AddedDataSet->IsDataSetValid) // Making sure the dataset is only dealt with if it was loaded succsessfully
@@ -246,6 +284,8 @@ void ParentWindow::deleteDataSet(DataSet* dataSet)
         ui->actionHist_Plot->setEnabled(false);
         ui->actionFunction->setEnabled(false);
         ui->actionInterpolation->setEnabled(false);
+        // 2025/2026 feature 2: disable FFT action when no datasets are left
+        ui->actionFourierTransform->setEnabled(false);
     }
 
     refreshDataSetName();

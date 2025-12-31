@@ -63,6 +63,17 @@ QString ErrorDialog::getErrorDetails(int errCode)
             return "The new name of the dataset can not be any one of the functions or the constants include cos, sin, $pi, pi and etc, refer to help window to see more.";
         case 17:
             return "Unsupported file type";
+        // 2025/2026 feature 2: FFT error codes
+        case 18:
+            return "Invalid dataset selection. Please select a valid dataset.";
+        case 19:
+            return "Dataset is too small. The dataset must have at least 2 data points to compute the FFT.";
+        case 20:
+            return "X-values in the dataset must be strictly increasing for FFT computation.";
+        case 21:
+            return "Interpolation to uniform spacing failed. Please check your dataset.";
+        case 22:
+            return "Sampling interval is too small. The time difference between consecutive samples is nearly zero.";
         default:
             return "Valid error code not received.";
     }

@@ -15,6 +15,7 @@ SOURCES += \
     datasetwindow.cpp \
     editaxisdialog.cpp \
     errordialog.cpp \
+    fftdialog.cpp \
     functiondialog.cpp \
     graphstyledialog.cpp \
     graphwindow.cpp \
@@ -34,6 +35,7 @@ HEADERS += \
     datasetwindow.h \
     editaxisdialog.h \
     errordialog.h \
+    fftdialog.h \
     functiondialog.h \
     graphstyledialog.h \
     graphwindow.h \
@@ -50,6 +52,7 @@ FORMS += \
     datasetwindow.ui \
     editaxisdialog.ui \
     errordialog.ui \
+    fftdialog.ui \
     functiondialog.ui \
     graphstyledialog.ui \
     graphwindow.ui \

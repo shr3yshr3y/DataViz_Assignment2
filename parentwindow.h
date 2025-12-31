@@ -28,6 +28,8 @@
 #include "helpdialog.h"
 #include "functiondialog.h"
 #include "interpolationdialog.h"
+// 2025/2026 feature 2
+#include "fftdialog.h"
 #include "atmsp.h"
 #include "qmath.h"
 #include <QTextStream>
@@ -64,6 +66,11 @@ private slots:
     void on_actionInterpolation_triggered();
     // new feature 3: receive interpolation dataset from interpolationd dialog
     void receiveInterpolationDataSet(DataSet* newDataSet);
+
+    // 2025/2026 feature 2: Fourier Transform
+    void on_actionFourierTransform_triggered();
+    // 2025/2026 feature 2: receive FFT dataset (amplitude or phase)
+    void receiveFFTDataSet(DataSet* newDataSet);
 
     void on_action1D_Plot_triggered();
 

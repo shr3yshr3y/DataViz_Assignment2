@@ -53,6 +53,7 @@
     </property>
     <addaction name="actionFunction"/>
     <addaction name="actionInterpolation"/>
+    <addaction name="actionFourierTransform"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -90,6 +91,7 @@
    <addaction name="separator"/>
    <addaction name="actionFunction"/>
    <addaction name="actionInterpolation"/>
+   <addaction name="actionFourierTransform"/>
    <addaction name="separator"/>
    <addaction name="actionHelp"/>
    <addaction name="actionAbout"/>
@@ -146,6 +148,15 @@
    </property>
    <property name="text">
     <string>Interpolation</string>
+   </property>
+  </action>
+  <action name="actionFourierTransform">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/function.svg</normaloff>:/icons/function.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Fourier Transform</string>
    </property>
   </action>
   <action name="action1D_Plot">
