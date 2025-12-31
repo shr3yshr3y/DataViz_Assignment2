@@ -250,6 +250,10 @@ void GraphWindow::SetFigureSetting()
     connect(ui->customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlot->xAxis2, SLOT(setRange(QCPRange)));
     connect(ui->customPlot->yAxis, SIGNAL(rangeChanged(QCPRange)), ui->customPlot->yAxis2, SLOT(setRange(QCPRange)));
     ui->customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom | QCP::iSelectPlottables);
+
+    // 2025/2026 feature 1: store original tickers for restoration when switching from log to linear
+    originalXTicker = ui->customPlot->xAxis->ticker();
+    originalYTicker = ui->customPlot->yAxis->ticker();
 }
 
 
@@ -318,6 +322,8 @@ void GraphWindow::OpenEditAxisDialog(){
 
     //send the old range to the dialog, so the user dont need to specify the ranges if they dont want to change the ranges.
     connect(this, SIGNAL(sendOldRange(double, double, double, double)), EditAxis_dlg, SLOT(receiveOldRange(double, double, double, double)));
+    // 2025/2026 feature 1: send log scale state to dialog
+    connect(this, SIGNAL(sendLogScaleState(bool, bool)), EditAxis_dlg, SLOT(receiveLogScaleState(bool, bool)));
 
     double xOldLeft = ui->customPlot->xAxis->range().lower;
     double xOldRight = ui->customPlot->xAxis->range().upper;
@@ -325,6 +331,8 @@ void GraphWindow::OpenEditAxisDialog(){
     double yOldRight = ui->customPlot->yAxis->range().upper;
 
     emit sendOldRange(xOldLeft, xOldRight, yOldLeft, yOldRight);
+    // 2025/2026 feature 1: send current log scale state
+    emit sendLogScaleState(xLogScale, yLogScale);
 
     EditAxis_dlg->exec();
     delete EditAxis_dlg;
@@ -343,6 +351,33 @@ void GraphWindow::receiveNewXYRange(double xLeftLimit, double xRightLimit, doubl
     ui->customPlot->xAxis->setRange(xLeftLimit, xRightLimit);
     ui->customPlot->yAxis->setRange(yLeftLimit, yRightLimit);
     // replot the figure after set the new range
+    ui->customPlot->replot();
+}
+
+// 2025/2026 feature 1: receive log scale state and apply to axes
+void GraphWindow::receiveLogScaleState(bool xLog, bool yLog){
+    // Apply X-axis scale type
+    if (xLog != xLogScale) {
+        xLogScale = xLog;
+        if (xLog) {
+            ui->customPlot->xAxis->setScaleType(QCPAxis::stLogarithmic);
+            ui->customPlot->xAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
+        } else {
+            ui->customPlot->xAxis->setScaleType(QCPAxis::stLinear);
+            ui->customPlot->xAxis->setTicker(originalXTicker);
+        }
+    }
+    // Apply Y-axis scale type
+    if (yLog != yLogScale) {
+        yLogScale = yLog;
+        if (yLog) {
+            ui->customPlot->yAxis->setScaleType(QCPAxis::stLogarithmic);
+            ui->customPlot->yAxis->setTicker(QSharedPointer<QCPAxisTickerLog>(new QCPAxisTickerLog));
+        } else {
+            ui->customPlot->yAxis->setScaleType(QCPAxis::stLinear);
+            ui->customPlot->yAxis->setTicker(originalYTicker);
+        }
+    }
     ui->customPlot->replot();
 }
 

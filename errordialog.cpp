@@ -63,6 +63,9 @@ QString ErrorDialog::getErrorDetails(int errCode)
             return "The new name of the dataset can not be any one of the functions or the constants include cos, sin, $pi, pi and etc, refer to help window to see more.";
         case 17:
             return "Unsupported file type";
+        // 2025/2026 feature 1: log scale error
+        case 18:
+            return "Log scale cannot cross or enter 0 axis, only either strictly positive or negative values allowed.";
         default:
             return "Valid error code not received.";
     }
