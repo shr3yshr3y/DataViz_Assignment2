@@ -36,31 +36,18 @@ private:
     // flag to indicate this is a histogram or not
     bool isHistogramPlot = 0;
 
-    // 2025/2026 feature 1: log scale states
-    bool xLogScale = false;
-    bool yLogScale = false;
-
     void displayErrorDialog(int errCode);
-    // 2025/2026 feature 1: helper to adjust limits for log scale
-    void adjustLimitsForLog(double &left, double &right);
 
 private slots:
     void on_buttonBox_accepted();
     void on_buttonBox_rejected();
 
     void receiveOldRange(double xOldLeft, double xOldRight, double yOldLeft, double yOldRight);
-    // 2025/2026 feature 1: receive log scale state from graphwindow
-    void receiveLogScaleState(bool xLog, bool yLog);
-    // 2025/2026 feature 1: checkbox state changed slots
-    void on_XLogCheckBox_stateChanged(int state);
-    void on_YLogCheckBox_stateChanged(int state);
 
 signals:
     //these are the signal to send to graphwindow,
     void sendNewAxisNames(QString XName, QString YName);
     void sendNewXYRange(double xLeftLimit, double xRightLimit, double yLeftLimit, double yRightLimit);
-    // 2025/2026 feature 1: signal to send log scale state
-    void sendLogScaleState(bool xLog, bool yLog);
 };
 
 #endif // EDITAXISDIALOG_H
