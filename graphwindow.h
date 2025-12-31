@@ -73,6 +73,13 @@ private:
     // New feature 4: export
     QAction* actionExport = new QAction("Export graph", this);
 
+    // 2025/2026 feature 1: store log scale state
+    bool xLogScale = false;
+    bool yLogScale = false;
+    // 2025/2026 feature 1: store original tickers for restoration
+    QSharedPointer<QCPAxisTicker> originalXTicker;
+    QSharedPointer<QCPAxisTicker> originalYTicker;
+
     void contextMenuEvent(QContextMenuEvent *event);
     void ConstructContextMenu(QMenu *);
 
@@ -101,11 +108,16 @@ private slots:
     // Debug 2: refresh the names of the graphes
     void refreshGraphName();
 
+    // 2025/2026 feature 1: receive log scale state from dialog
+    void receiveLogScaleState(bool xLog, bool yLog);
+
 signals:
     void requestAllDataSets_SIGNAL();
 
     // New feature 2: send the old range to the dialog
     void sendOldRange(double, double, double, double);
+    // 2025/2026 feature 1: send log scale state to dialog
+    void sendLogScaleState(bool, bool);
 };
 
 #endif // GRAPHWINDOW_H
