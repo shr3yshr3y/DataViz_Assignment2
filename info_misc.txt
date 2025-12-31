@@ -1,0 +1,5 @@
+Adding a New Section to the Help Section:
+To add to the help section, create a text file and save it in the app directory. Add the text file into the resource director as ":\texts\info_name.txt". In helpdialog.cpp's constructor, add the following line: ui->section_combobox->addItem(insert the name of the section here). Followed by add an additional case in on_section_comboBox_currentIndexChanged(int index), in this case add the following: printInfo(":\texts\info_name.txt"). Recomplie and the new help section should appear in the help window.
+
+Modifying an Info File:
+To modify any file that the help window uses, just look for the appropriate text file in the app directory and open it using prefered text editior.

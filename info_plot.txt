@@ -1,0 +1,8 @@
+Plotting a Graph:
+To plot a dataset or datasets, click on Plot->Plot Graph. If there is one dataset available, the app will plot the graph of that dataset using settings defined by the user, if there are multiple datasets, the colour of each dataset's graph will alternate but the width and style will be user defined. All the datasets will be plotted on the same graph.
+
+Plotting a Histogram:
+To plot a histogram graph of a dataset, click on Plot->Plot Histogram. This will open the histogram window which would allow the user to select which dataset to use. once the dataset has been selected using the combobox, click on the plot button will generate a graph within the window. Changing dataset and click plot again will refresh the graph. Clicking on cancel will close the window.
+
+Graph Settings:
+To change the aesthetics of a graph, click on Plot->Graph Settings. Here the user can choose the colour, width, and line style. If no settings are configured the app will default to the colour black, line width of 1, and a single line style. The colour is determined by the app when mulitple datasets are present. 

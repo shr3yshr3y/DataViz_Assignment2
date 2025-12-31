@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>dataset.svg</file>
+        <file>graph.svg</file>
+        <file>aboutSymbol.svg</file>
+        <file>helpSymbol.svg</file>
+        <file>errorSymbol.svg</file>
+        <file>edit.svg</file>
+        <file>DataViz.png</file>
+        <file>histogram.svg</file>
+        <file>function.svg</file>
+        <file>plot.svg</file>
+        <file>export.svg</file>
+        <file>editAxis.svg</file>
+        <file>Interpolation.svg</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>SplashScreen.png</file>
+    </qresource>
+    <qresource prefix="/"/>
+</RCC>

@@ -1,0 +1,2 @@
+Calculating an Expression:
+To input a mathematical expression, click on Analysis->Function. This will open the function window and prompt the user to enter a mathematical function using the available datasets as parameters. Entering an invalid dataset or expression will cause the app to not plot anything. Clicking on the calculate will plot the results of a valid expression on a graph. Clicking on cancel will close the window.

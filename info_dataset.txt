@@ -1,0 +1,16 @@
+Loading a Dataset:
+Loading a file can be done by clicking on File menu->Load Dataset
+Alternatively, by clicking on the page symbol in the toolbar at the top of the app.
+
+The Form of Dataset:
+The app currently is designed to work with datasets saved in txt file, where the data is listed in two columns. The first column is the x coordinate of the data point while the second is the y-coordinate of the datapoints.
+The x and y coordinates can be either separated by a tap or a comma.
+
+Plotting a Dataset:
+The app currently has only one way of plotting a dataset, that is by right-clicking on the dataset window->plot->XYplot.
+
+Commenting on a dataset:
+To add or view a comment on a dataset, go to File->Examine Dataset. The app will show what dataset is available and what comments are saved in the current dataset selected. To add a comment, type the comment int he textbox and clcik the add button, this will overwrite any comment present for the selected dataset. Clicking on the cancel button will not save any changes made and close the window.
+
+Creating a Dataset:
+To create a new dataset, go to File->Create Dataset, this will open the dataset creation window. To create the dataset, enter the name of the dataset in the textbox and set the number of rows suing the spinbox. The spinbox will add rows to the table below, enter each data value in the appropriate section of the table, make sure the values are of values or the app will refuse to create the dataset. Clicking on the save button will prompt the user to choose where to save the dataset, after saving a message will pop up and the window will close. Clicking on the cancel button will cancel any operations made and close the window.
