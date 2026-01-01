@@ -46,10 +46,12 @@ private:
 
     // Compute the FFT of a dataset and return amplitude and phase datasets
     // Returns true if successful, false otherwise
+    // If interpolatedData is provided and interpolation was performed, it will contain the interpolated data
     bool computeFFT(DataSet* inputDataSet, 
                     QVector<QPointF>& amplitudeData, 
                     QVector<QPointF>& phaseData,
-                    bool interpolateToUniform);
+                    bool interpolateToUniform,
+                    QVector<QPointF>* interpolatedData = nullptr);
 
     // Check if the dataset has uniformly spaced x-values
     bool isUniformlySpaced(DataSet* dataSet, double tolerance = 1e-6);
